@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>XYZ M D Pairing</title>
+<style>
+body { font-family: Arial; background: black; color: white; text-align: center; padding-top: 100px; }
+input { padding: 12px; width: 250px; font-size: 16px; }
+button { padding: 12px 20px; font-size: 16px; background: blue; color: white; border: none; cursor: pointer; }
+</style>
+</head>
+<body>
+<h1>👹 XYZ M D Pairing</h1>
+<input id="number" placeholder="234XXXXXXXXXX">
+<br><br>
+<button onclick="pair()">Generate Pair Code</button>
+<button onclick="resetSession()">Reset Session</button>
+<h2 id="code"></h2>
+<script>
+async function pair() {
+  const number = document.getElementById("number").value;
+  const res = await fetch(`/pair?number=${number}`);
+  const text = await res.text();
+  document.getElementById("code").innerText = text;
+}
+async function resetSession() {
+  await fetch("/reset");
+  alert("Session deleted. Restart bot to pair again.");
+}
+</script>
+</body>
+</html>
